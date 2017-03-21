@@ -17,7 +17,7 @@
 //= require "core-js/client/shim.min"
 //= require "zone.js/dist/zone"
 //= require "reflect-metadata/Reflect"
-//= require "rxjs/bundles/Rx.umd"
+//= require "rxjs/bundles/Rx.js"
 //= require "@angular/core/bundles/core.umd"
 //= require "@angular/common/bundles/common.umd"
 //= require "@angular/compiler/bundles/compiler.umd"
