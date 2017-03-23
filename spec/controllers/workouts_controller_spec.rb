@@ -4,7 +4,7 @@ require 'support/factory_girl'
 RSpec.describe WorkoutsController do
   describe 'GET #index' do
     it 'renders valid JSON data of all workouts' do
-      # json_spec gem
+
     end
   end
 
