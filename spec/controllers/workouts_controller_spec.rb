@@ -2,26 +2,22 @@ require 'rails_helper'
 require 'support/factory_girl'
 
 RSpec.describe WorkoutsController do
+  $workout_data = nil
+  let(:workout_data) {workout_data = JSON.parse(response.body, symbolize_names: true)}
+
   describe 'GET #index' do
     it 'renders valid JSON data of all workouts' do
-
+      get :index
+      expected = {name: 'Lunges', exercise_type: 'Strength Training', description: 'Do sets on each leg'}
+      expect(workout_data.count).to be == 4
+      expect(workout_data[1].except(:id).compact).to eq(expected)
     end
   end
 
   describe 'GET #show' do
-    it 'assigns the requested workout to @workout' do
-    end
-    it 'renders valid JSON data of @workout' do
-    end
-  end
+    it 'renders valid JSON data for the requested workout' do
+      get :show
 
-  describe 'GET #new' do
-    it 'assigns a new Workout to @workout' do
-    end
-  end
-
-  describe 'GET #edit' do
-    it 'assigns the requested workout to @workout' do
     end
   end
 

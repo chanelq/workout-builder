@@ -1,28 +1,10 @@
 class WorkoutsController < ApplicationController
   def index
-    @workouts = Workout.all
-    respond_to do |format|
-      format.json do
-        render json: @workouts.to_json
-      end
-    end
+    render json: Workout.all.to_json(except: [:created_at, :updated_at])
   end
 
   def show
-    @workout = Workout.find(params[:id])
-    respond_to do |format|
-      format.json do
-        render json: @workout.to_json
-      end
-    end
-  end
-
-  def new
-    @workout = Workout.new
-  end
-
-  def edit
-    @workout = Workout.find(params[:id])
+    render json: Workout.find(params[:id]).to_json
   end
 
   def create
