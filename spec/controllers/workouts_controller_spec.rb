@@ -24,11 +24,14 @@ RSpec.describe WorkoutsController do
 
   describe 'POST create' do
     context 'with valid attributes' do
-      it 'saves the new workout in the database and returns its valid JSON data' do
+      it 'saves the new workout in the database' do
         workout_params = attributes_for(:workout)
         expect {
           post :create, workout: workout_params
         }.to change(Workout, :count).by(1)
+        # add test for valid json
+      end
+      it 'returns valid JSON data for the new workout' do
       end
     end
 
@@ -44,22 +47,29 @@ RSpec.describe WorkoutsController do
 
   describe 'PUT update' do
     context 'with valid attributes' do
-      it 'locates the requested @workout' do
+      it 'renders valid JSON data for the selected workout' do
       end
-      it "changes @workout's attributes" do
+      it "changes the selected workout's attributes" do
       end
+      it 'returns valid JSON data for the updated workout'
     end
 
     context 'with invalid attributes' do
-      it 'locates the requested @workout' do
+      it 'renders valid JSON data for the selected workout' do
       end
-      it "does not change @workout's attributes" do
+      it "does not change the selected workout's attributes" do
       end
     end
   end
 
   describe 'DELETE destroy' do
+    before :each do
+      @workout = create(:workout)
+    end
     it 'deletes the workout' do
+      expect{
+        delete :destroy, id: @workout
+      }.to change(Workout, :count).by(-1)
     end
   end
 end
