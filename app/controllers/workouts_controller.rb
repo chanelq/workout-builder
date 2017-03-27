@@ -12,8 +12,8 @@ class WorkoutsController < ApplicationController
 
   def create
     @workout = Workout.new(workout_params)
-    if @test_type.save
-      redirect_to #
+    if @workout.save
+      render json: @workout.to_json(except: EXCLUDED_FIELDS)
     else
       #
     end
@@ -32,5 +32,19 @@ class WorkoutsController < ApplicationController
     @workout = Workout.find(params[:id])
     @workout.destroy
     redirect_to #
+  end
+
+  private
+
+  def workout_params
+    params.require(:workout)
+          .permit(:name,
+                  :exercise_type,
+                  :description,
+                  :sets,
+                  :reps,
+                  :rest,
+                  :duration,
+                  :distance)
   end
 end
