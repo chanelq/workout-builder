@@ -1,10 +1,13 @@
 class WorkoutsController < ApplicationController
+
+  EXCLUDED_FIELDS = [:created_at, :updated_at]
+
   def index
-    render json: Workout.all.to_json(except: [:created_at, :updated_at])
+    render json: Workout.all.to_json(except: EXCLUDED_FIELDS)
   end
 
   def show
-    render json: Workout.find(params[:id]).to_json
+    render json: Workout.find(params[:id]).to_json(except: EXCLUDED_FIELDS)
   end
 
   def create
