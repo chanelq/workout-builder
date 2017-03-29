@@ -11,27 +11,24 @@ class WorkoutsController < ApplicationController
   end
 
   def create
-    @workout = Workout.new(workout_params)
-    if @workout.save
-      render json: @workout.to_json(except: EXCLUDED_FIELDS)
+    workout = Workout.new(workout_params)
+    if workout.save
+      render json: workout.to_json(except: EXCLUDED_FIELDS)
     else
-      #
+      render json: ApplicationHelper.json_errors(workout)
     end
   end
 
   def update
-    @workout = Workout.find(params[:id])
-    if @workout.update(workout_params)
-      redirect_to #
-    else
+    if Workout.find(params[:id]).update(workout_params)
       #
+    else
+      render json: ApplicationHelper.json_errors(workout)
     end
   end
 
   def destroy
-    @workout = Workout.find(params[:id])
-    @workout.destroy
-    redirect_to #
+    Workout.find(params[:id]).destroy
   end
 
   private
