@@ -39,8 +39,7 @@ RSpec.describe WorkoutsController do
         expect {
           post :create, params: { workout: workout_params }
         }.to_not change(Workout, :count)
-        expect(workout_data[:errors]).to be_truthy
-        expect(workout_data[:errors].count).to be > 0
+        expect_errors(workout_data)
       end
     end
   end
@@ -51,30 +50,24 @@ RSpec.describe WorkoutsController do
     end
 
     context 'with valid attributes' do
-      it 'renders valid JSON data for the selected workout' do
-      end
-
       it "changes the selected workout's attributes" do
-        put :update, params: { id: @workout,
-          workout: attributes_for(:workout, name: 'Sprint', distance: '.5 miles') }
+        workout_params = attributes_for(:workout, name: 'Sprint', distance: '.5 miles')
+        put :update, params: { id: @workout, workout: workout_params }
         @workout.reload
         expect(@workout.name).to eq('Sprint')
         expect(@workout.distance).to eq('.5 miles')
-      end
-
-      it 'returns valid JSON data for the updated workout' do
+        expect(workout_data.except(:id).compact).to eq(workout_params)
       end
     end
 
     context 'with invalid attributes' do
-      it 'renders valid JSON data for the selected workout' do
-      end
-
       it "does not change the selected workout's attributes" do
-        put :update, id: @workout, workout: attributes_for(:workout, name: 'nil', exercise_type: 'nil')
+        put :update, params: { id: @workout,
+          workout: attributes_for(:workout, name: nil, exercise_type: nil) }
         @workout.reload
         expect(@workout.name).to eq('Long Run')
         expect(@workout.exercise_type).to eq('Cardio')
+        expect_errors(workout_data)
       end
     end
   end
@@ -84,10 +77,26 @@ RSpec.describe WorkoutsController do
       @workout = create(:workout)
     end
 
-    it 'deletes the workout' do
-      expect{
-        delete :destroy, id: @workout
-      }.to change(Workout, :count).by(-1)
+    context 'with valid id' do
+      it 'deletes the workout' do
+        expect{
+          delete :destroy, params: { id: @workout }
+        }.to change(Workout, :count).by(-1)
+      end
+    end
+
+    context 'with invalid id' do
+      it 'fails to delete record' do
+        expect{
+          delete :destroy, params: { id: (Workout.count * 10) }
+        }.to change(Workout, :count).by(0)
+        expect_errors(workout_data)
+      end
     end
   end
+end
+
+def expect_errors(json_data)
+  expect(json_data[:errors]).to be_truthy
+  expect(json_data[:errors].count).to be > 0
 end
