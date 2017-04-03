@@ -53,3 +53,5 @@ bower.json
 /public/**/*.js
 /public/**/*.map
 /typings
+
+npm-debug.log
