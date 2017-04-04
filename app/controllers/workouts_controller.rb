@@ -3,7 +3,8 @@ class WorkoutsController < ApplicationController
   EXCLUDED_FIELDS = [:created_at, :updated_at]
 
   def index
-    render json: Workout.all.to_json(except: EXCLUDED_FIELDS)
+    # render json: Workout.all.to_json(except: EXCLUDED_FIELDS)
+    render json: Workout.all
   end
 
   def show
@@ -40,7 +41,8 @@ class WorkoutsController < ApplicationController
 
   def workout_params
     params.require(:workout)
-          .permit(:name,
+          .permit(:id,
+                  :name,
                   :exercise_type,
                   :description,
                   :sets,
