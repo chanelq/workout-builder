@@ -8,7 +8,7 @@ RSpec.describe WorkoutsController do
   describe 'GET #index' do
     it 'renders valid JSON data of all workouts' do
       get :index
-      expected = { name: 'Lunges', exercise_type: 'Strength Training', description: 'Do sets on each leg' }
+      expected = { name: 'Lunges', exerciseType: 'Strength Training', description: 'Do sets on each leg' }
       expect(workout_data.count).to be == 4
       expect(workout_data[1].except(:id).compact).to eq(expected)
     end
@@ -17,7 +17,7 @@ RSpec.describe WorkoutsController do
   describe 'GET #show' do
     it 'renders valid JSON data for the requested workout' do
       get :show, params: { id: 2 }
-      expected = { name: 'Lunges', exercise_type: 'Strength Training', description: 'Do sets on each leg' }
+      expected = { name: 'Lunges', exerciseType: 'Strength Training', description: 'Do sets on each leg' }
       expect(workout_data.except(:id).compact).to eq(expected)
     end
   end
@@ -25,11 +25,11 @@ RSpec.describe WorkoutsController do
   describe 'POST create' do
     context 'with valid attributes' do
       it 'saves workout to database' do
-        workout_params = attributes_for(:workout)
+        workout = { name: 'Lunges', exerciseType: 'Strength Training', description: 'Do sets on each leg' }
         expect {
-          post :create, params: { workout: workout_params }
+          post :create, params: { workout: workout }
         }.to change(Workout, :count).by(1)
-        expect(workout_data.except(:id).compact).to eq(workout_params)
+        expect(workout_data.except(:id).compact).to eq(workout)
       end
     end
 
