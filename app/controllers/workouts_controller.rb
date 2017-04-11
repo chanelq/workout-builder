@@ -1,19 +1,19 @@
-class WorkoutsController < ApplicationController
+class WorkoutsController < ApisController
 
   EXCLUDED_FIELDS = [:created_at, :updated_at]
 
   def index
-    render json: Workout.all.to_json(except: EXCLUDED_FIELDS)
+    render json: Workout.all
   end
 
   def show
-    render json: Workout.find(params[:id]).to_json(except: EXCLUDED_FIELDS)
+    render json: Workout.find(params[:id])
   end
 
   def create
     workout = Workout.new(workout_params)
     if workout.save
-      render json: workout.to_json(except: EXCLUDED_FIELDS)
+      render json: workout
     else
       render json: ApplicationHelper.json_errors(workout)
     end
@@ -39,8 +39,9 @@ class WorkoutsController < ApplicationController
   private
 
   def workout_params
-    params.require(:workout)
-          .permit(:name,
+    api_params.require(:workout)
+          .permit(:id,
+                  :name,
                   :exercise_type,
                   :description,
                   :sets,
