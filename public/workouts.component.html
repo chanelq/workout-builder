@@ -3,7 +3,7 @@
   <li *ngFor="let workout of workouts"
     [class.selected]="workout === selectedWorkout"
     (click)="onSelect(workout)">
-    <span class="badge">{{workout.id}}</span> {{workout.name}}
+    <span class="badge">{{workout.exerciseType}}</span> {{workout.name}}
   </li>
 </ul>
 <workout-detail [workout]="selectedWorkout"></workout-detail>
