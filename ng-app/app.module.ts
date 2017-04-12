@@ -1,15 +1,25 @@
 import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule }   from '@angular/forms';
-import { AppComponent }   from './app.component';
+
+import { AppComponent }        from './app.component';
+import { WorkoutsComponent } from './workouts.component';
+import { HomeComponent } from './home.component';
+import { WorkoutDetailComponent } from './workout-detail.component';
+import { AppRoutingModule } from './app-routing.module'
+
 @NgModule({
-  imports:      [
+  imports: [
     BrowserModule,
-    FormsModule
+    FormsModule,
+    AppRoutingModule
   ],
   declarations: [
-    AppComponent
+    AppComponent,
+    WorkoutsComponent,
+    WorkoutDetailComponent,
+    HomeComponent
   ],
-  bootstrap:    [ AppComponent ]
+  bootstrap: [ AppComponent ]
 })
 export class AppModule { }

@@ -1,0 +1,9 @@
+<h2>My Workouts</h2>
+<ul class="workouts">
+  <li *ngFor="let workout of workouts"
+    [class.selected]="workout === selectedWorkout"
+    (click)="onSelect(workout)">
+    <span class="badge">{{workout.id}}</span> {{workout.name}}
+  </li>
+</ul>
+<workout-detail [workout]="selectedWorkout"></workout-detail>
