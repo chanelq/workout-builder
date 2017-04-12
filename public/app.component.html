@@ -1,7 +1,6 @@
 <h1>{{title}}</h1>
-<h2>{{workout.name}} details!</h2>
-<div><label>id: </label>{{workout.id}}</div>
-<div>
-  <label>name: </label>
-  <input [(ngModel)]="workout.name" placeholder="name">
-</div>
+    <nav>
+      <a routerLink="/home" routerLinkActive="active">Home</a>
+      <a routerLink="/workouts" routerLinkActive="active">Workouts</a>
+    </nav>
+<router-outlet></router-outlet>
