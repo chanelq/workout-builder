@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 
 import { Workout } from './workout';
+
 @Component({
   selector: 'workout-detail',
   template: `
