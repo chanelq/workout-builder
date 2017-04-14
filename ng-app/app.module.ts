@@ -9,6 +9,7 @@ import { HomeComponent } from './home.component';
 import { WorkoutDetailComponent } from './workout-detail.component';
 import { AppRoutingModule } from './app-routing.module'
 import { WorkoutService } from './workout.service';
+import { WorkoutSearchComponent } from './workout-search.component';
 
 @NgModule({
   imports: [
@@ -21,7 +22,8 @@ import { WorkoutService } from './workout.service';
     AppComponent,
     WorkoutsComponent,
     WorkoutDetailComponent,
-    HomeComponent
+    HomeComponent,
+    WorkoutSearchComponent
   ],
   bootstrap: [ AppComponent ],
   providers: [ WorkoutService ]

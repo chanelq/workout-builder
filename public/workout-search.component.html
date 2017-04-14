@@ -1,0 +1,8 @@
+<h4>Create your Workout, search below:</h4>
+<input #searchBox id="search-box" (keyup)="search(searchBox.value)" />
+<div>
+  <div *ngFor="let workout of workouts | async"
+       class="search-result" >
+    {{workout.name}}
+  </div>
+</div>
