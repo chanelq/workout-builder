@@ -10,6 +10,9 @@ class WorkoutsController < ApisController
     render json: Workout.find(params[:id])
   end
 
+  def search
+    render json: Workout.where("name LIKE ?", "%#{params[:term]}%")
+  end
   def create
     workout = Workout.new(workout_params)
     if workout.save
