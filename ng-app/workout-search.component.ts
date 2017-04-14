@@ -38,7 +38,7 @@ export class WorkoutSearchComponent implements OnInit {
     this.workouts = this.searchTerms
       .debounceTime(300)
       .distinctUntilChanged()
-      .switchMap(term => term ? this.workoutearchService.search(term) : Observable.of<Workout[]>([]))
+      .switchMap(term => term ? this.workoutSearchService.search(term) : Observable.of<Workout[]>([]))
       .catch(error => {
               // TODO: add real error handling
               console.log(error);
