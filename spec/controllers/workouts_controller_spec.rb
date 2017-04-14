@@ -14,6 +14,15 @@ RSpec.describe WorkoutsController do
     end
   end
 
+  describe 'GET #search' do
+    it 'renders valid JSON data of all workouts' do
+      expected = create(:workout, name: "Test workout")
+      get :search , params: { term: 'est wor'}
+      expect(workout_data[0][:name]).to eq(expected.name)
+    end
+  end
+
+
   describe 'GET #show' do
     it 'renders valid JSON data for the requested workout' do
       get :show, params: { id: 2 }
